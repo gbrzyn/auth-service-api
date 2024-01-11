@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  auth-service:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: auth-service
+    ports:
+      - "7200:7200"
+    volumes:
+      - .:/auth-service
+    environment:
+      PORT: "7200"
+    networks:
+      - api_network
+
+  postgres:
+    image: postgres:13.1-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - .data/db:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    networks:
+      - api_network
+networks:
+  api_network:
+    driver: bridge

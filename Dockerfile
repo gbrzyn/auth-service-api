@@ -1,6 +1,6 @@
 FROM golang:1.21.5-alpine3.19
 
-WORKDIR /api-service
+WORKDIR /auth-service
 
 # pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change
 COPY go.mod go.sum ./
